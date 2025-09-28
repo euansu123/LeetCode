@@ -27,38 +27,28 @@ class Solution:
         :param b:
         :return:
         """
-        pass
-        # if len(a) > len(b):
-        #     maxList = list(a)
-        #     minList = list(b)
-        # else:
-        #     maxList = list(b)
-        #     minList = list(a)
-        #
-        # for i in range(-1,-len(maxList)-1,-1):
-        #     # 1.判断minStr在该索引下是否含有元素
-        #     if int(maxList[i]) > 1:
-        #         if abs(i) >= len(maxList):
-        #             maxList[i] = 0
-        #             maxList = [1] + maxList
-        #         else:
-        #             print(i)
-        #
-        #             maxList[i-1] = int(maxList[i]) + 1
-        #             maxList[i] = 0
-        #     # 2.相同位置的元素进行相加
-        #     if abs(i) < len(minList):
-        #         maxList[i] = int(minList[i]) + int(maxList[i])
-        #
-        #         if int(maxList[i]) > 1:
-        #             if abs(i) >= len(maxList):
-        #                 maxList[i] = 0
-        #                 maxList = [1] + maxList
-        #             else:
-        #                 maxList[i - 1] = int(maxList[i]) + 1
-        #                 maxList[i] = 0
+        if len(a) > len(b):
+            maxList = list(a)
+            minList = list(b)
+        else:
+            maxList = list(b)
+            minList = list(a)
 
-        return
+        for i in range(-1,-len(maxList)-1,-1):
+            # 判断较小的变量，该位置是否有值
+            if abs(i) <= len(minList):
+                maxList[i] = int(minList[i]) + int(maxList[i])
+            # 如果maxList[i] = 3、2
+            if int(maxList[i]) >= 2:
+                maxList[i] = int(maxList[i]) - 2
+                # 需要考虑较大位数的越位情况
+                if abs(i) == len(maxList):
+                    maxList = [1] + maxList
+                else:
+                    maxList[i-1] = int(maxList[i-1]) + 1
+
+        maxStr = "".join(map(str, maxList))
+        return maxStr
 
 
 
